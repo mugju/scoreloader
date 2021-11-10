@@ -8,13 +8,16 @@ const dotenv = require("dotenv"); //환경변수
 
 const path = require("path");
 
+const passport = require("passport");
+
 dotenv.config();
 const pageRouter = require("./routes/page");
 
 const app = express();
 
 const {sequelize} = require("./models");
-
+const passportConfig = require("./passport");
+passportConfig();
 
 app.set('port',process.env.PORT || 8080);
 app.set('view engine','html');
@@ -51,6 +54,9 @@ app.use(session({
         secure:false, //https가 아니라서..
     },
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/',pageRouter);
 
