@@ -12,7 +12,6 @@ router.use((req,res,next)=>{
 
 router.get('/profile',isLoggedIn, (req,res)=>{
     res.render('profile',{title : `내정보 - scoreloader`});
-    
 });
 
 router.get('/join',isNotLoggedIn,(req,res)=>{

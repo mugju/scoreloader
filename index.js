@@ -12,6 +12,7 @@ const passport = require("passport");
 
 dotenv.config();
 const pageRouter = require("./routes/page");
+const authRouter = require("./routes/auth")
 
 const app = express();
 
@@ -59,6 +60,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/',pageRouter);
+app.use('/auth',authRouter);
 
 app.use((req,res,next)=>{
     const error = new Error(`${req.method} ${req.url} 이 존재하지 않습니다.`);
