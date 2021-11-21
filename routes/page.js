@@ -21,10 +21,10 @@ router.get('/join',isNotLoggedIn,(req,res)=>{
 
 
 router.get('/',(req,res,next)=>{
-    const twins = [];
+    const twits = [];
     res.render('main',{
         title : 'ScoreLoader',
-        twins
+        twits
     });
 });
 
