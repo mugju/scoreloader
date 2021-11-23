@@ -23,7 +23,7 @@ router.get('/',(req,res,next)=>{
     const twits = [];
     res.render('main',{
         title : 'ScoreLoader',
-        twits
+        twits,
     });
 });
 
