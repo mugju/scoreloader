@@ -23,7 +23,7 @@ const upload = multer({
         },
         filename(req,file,cb) {
             const ext = path.extname(file.originalname);
-            cb(null,path.basename(file.originalname,ext)+Date.now().toString()+ext);
+            cb(null,path.basename(file.originalname,ext)+Date.now()+ext);
         },
 
     }),
@@ -48,7 +48,7 @@ router.post('/', isLoggedIn, upload2.none(), async (req,res, next)=>{
             const result = await Promise.all(
                 hashtags.map(tag => {
                 return Hashtag.findOrCreate({
-                    where: {title: tag.slice(1).toLowerCase}
+                    where: {title: tag.slice(1).toLowerCase()}
                 })
             }),
             );

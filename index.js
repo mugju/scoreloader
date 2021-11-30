@@ -12,7 +12,9 @@ const passport = require("passport");
 
 dotenv.config();
 const pageRouter = require("./routes/page");
-const authRouter = require("./routes/auth")
+const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
+const userRouter = require("./routes/user");
 
 const app = express();
 
@@ -40,6 +42,7 @@ sequelize.sync({force:false})
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public'))); // 정적파일 담을거임
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.json()); // json 요청 받기위함.
 
@@ -61,6 +64,8 @@ app.use(passport.session());
 
 app.use('/',pageRouter);
 app.use('/auth',authRouter);
+app.use('/user',userRouter);
+app.use('/post',postRouter);
 
 app.use((req,res,next)=>{
     const error = new Error(`${req.method} ${req.url} 이 존재하지 않습니다.`);

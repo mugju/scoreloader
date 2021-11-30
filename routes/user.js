@@ -4,7 +4,7 @@ const { isLoggedIn} = require('./middlewares');
 
 const User = require('../models/user');
 
-const router = express.router();
+const router = express.Router();
 
 router.post('/id:/follow', isLoggedIn , async (req, res, next) => {
     try{
