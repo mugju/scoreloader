@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.use((req,res,next)=>{
     res.locals.user = req.user;
-    res.locals.followCount = 0;
-    res.locals.followingCount = 0;
-    res.locals.followIdList = [];
+    res.locals.followCount = req.user ? req.user.Followers.length : 0;
+    res.locals.followingCount = req.user ? req.user.Following.length : 0;
+    res.locals.followIdList = req.user ? req.user.Following.map(f => f.id) : [];  
     next();
 });
 
