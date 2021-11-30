@@ -1,1 +1,9 @@
 node_modules/
+
+upload/
+
+.env
+
+upload/
+
+conf.txt
