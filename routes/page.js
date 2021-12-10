@@ -25,6 +25,7 @@ router.get('/',(req,res,next)=>{
     res.render('main',{
         title : 'ScoreLoader',
         twits,
+        
     });
 });
 router.get('/', async (req, res, next)=>{
