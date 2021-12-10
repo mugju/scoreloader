@@ -76,8 +76,6 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     
 });
 
-//OCR
-
 
 
 const upload2 = multer();
