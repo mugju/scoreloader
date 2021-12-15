@@ -3,7 +3,7 @@
 {% block content %}
     <div class="my-3 p-3 bg-body rounded shadow-sm">
       {% if user %}
-        <div>
+        <div class='h-100 p-5 text-white bg-dark rounded-3'>
           <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
             <!-- <div class="input-group">
               <textarea id="twit" name="content" maxlength="140"></textarea>
@@ -89,6 +89,7 @@
       });
     });
   </script>
+  
 {% endblock %}
 
 
