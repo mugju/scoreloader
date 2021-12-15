@@ -2,6 +2,7 @@ const passport = require("passport");
 
 const local = require("./localPolicy");
 const kakao = require("./kakaoPolicy");
+const naver = require("./naverPolicy"); //추가
 
 const User = require("../models/user");
 
@@ -30,5 +31,6 @@ module.exports = () =>{
     
     local();
     kakao();
+    naver();
     
 };
