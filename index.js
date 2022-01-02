@@ -22,7 +22,7 @@ const {sequelize} = require("./models");
 const passportConfig = require("./passport");
 passportConfig();
 
-app.set('port',process.env.PORT || 8080);
+app.set('port',process.env.PORT || 9000);
 app.set('view engine','html');
 
 
