@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="/main.css">
+  <title>{{title}}</title>
+
+  
+
+
+  <link href="../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="offcanvas.css" rel="stylesheet">
+  <meta name="theme-color" content="#7952b3">
+
+
+</head>
+
+
+<body>
+  <div id='wrap'>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="http://15.152.4.142:8080/">Scoreloader</a>
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">홈</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">악보요청</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">잡담</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                aria-expanded="false">Settings</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <form class="d-flex" id="hashtag-form" action="/hashtag">
+            <input class="form-control me-2" type="search" placeholder="태그검색" aria-label="Search" name="hashtag">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+    <div class="container py-3">
+      <!-- <div class="row row-offcanvas row-offcanvas-left"> -->
+
+      <div class="col-xs-12 col-sm-12">
+
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
+          <h1>Welcome Scoreloader!</h1>
+          <div class="col-md-6">
+            {% if user and user.id %}
+            <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
+            <div class="half">
+              <div>팔로잉</div>
+              <div class="count following-count">{{followingCount}}</div>
+            </div>
+            <div class="half">
+              <div>팔로워</div>
+              <div class="count follower-count">{{followerCount}}</div>
+            </div>
+            <input id="my-id" type="hidden" value="{{user.id}}">
+            <a id="my-profile" href="/profile" class="btn btn btn-primary">내 프로필</a>
+            <a id="logout" href="/auth/logout" class="btn btn btn-primary">로그아웃</a>
+            {% else %}
+            <form id="login-form" action="/auth/login" method="post">
+              <div class="input-group">
+                <label for="email">이메일</label>
+                <input id="email" type="email" name="email" required autofocus
+                  style="width:230px;height:30px;font-size:12px;">
+              </div>
+              <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input id="password" type="password" name="password" required
+                  style="width:230px;height:30px;font-size:12px;">
+              </div>
+              <a id="join" href="/join" class="btn btn-primary">회원가입</a>
+              <button id="login" type="submit" class="btn btn-primary">로그인</button>
+              <a id="kakao" href="/auth/kakao" class="btn btn-success">카카오톡</a>
+              <a id="kakao" href="/auth/naver" class="btn btn-success">네이버</a>
+            </form>
+            {% endif %}
+
+            <p>Hava a nice day.</p>
+          </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 shadow-lg">
+          <!-- <div class="profile-wrap"> -->
+
+          {% block content %}
+          {% endblock %}
+          <!-- </div> -->
+        </div>
+
+
+
+
+        <div class="row">
+          <div class="col-xs-6 col-lg-6">
+            <h3>스물, 그리고 스물다섯</h3>
+            <p>해당 사이트는 개발자의 티스토리 블로그입니다. 이곳에서 개발자가 어떤것에 관심이 있는지, 개발자의 트러블 슈팅을 볼 수 있어요!</p>
+            <p><a class="btn btn btn-info" href="https://nan-sso-gong.tistory.com/" role="button">View details »</a></p>
+          </div>
+          <!--/.col-xs-6.col-lg-4-->
+          <div class="col-xs-6 col-lg-6">
+            <h3>Mug-ju's Github</h3>
+            <p>개발자의 GitHub 입니다. 개발자가 어떤 프로젝트를 진행해 왔는지 확인할 수 있어요!<br><br> </p>
+            <p><a class="btn btn btn-info" href="https://github.com/mugju" role="button">View details »</a></p>
+          </div>
+
+
+        </div>
+        <!--/row-->
+      </div>
+      <!--/.col-xs-12.col-sm-9-->
+
+      <!-- <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+             -->
+      <div class="sidebar-module sidebar-module-inset">
+        <h3>New loaded Score</h3>
+        <p>이곳에는 최신 업로드된 악보들이 나올 공간입니다.</p>
+      </div>
+      <!-- </div> -->
+    </div>
+    <!--/.sidebar-offcanvas-->
+
+    <!--/row-->
+
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    window.onload = () => {
+      if (new URL(location.href).searchParams.get('loginError')) {
+        alert(new URL(location.href).searchParams.get('loginError'));
+      }
+    };
+  </script>
+
+  {% block script %}
+  {% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <script src="/offcanvas.js"></script>
+
+  </div>
+  <footer class="card-footer">
+    Made by&nbsp;
+    <a href="https://github.com/mugju/scoreloader" target="_blank">DongD</a>
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+    <button class="btn btn-info" onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+  </footer>
+
+</body>
+
+</html>

@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <div class="form-mid">
       {% if user %}
-        <div class='h-100 p-5 text-white bg-dark rounded-3'>
+        <div class='upload-box shadow-sm'>
           <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
             <!-- <div class="input-group">
               <textarea id="twit" name="content" maxlength="140"></textarea>
@@ -14,22 +14,28 @@
               <input id="img-url" type="hidden" name="url">
             </div>
             <div>
-              <label id="img-label" for="img">사진 업로드</label>
+              <label id="img-label" for="img">악보 업로드</label>
               <input id="img" type="file" accept="image/*">
-              <button id="twit-btn" type="submit" class="btn">loading start!</button>
+              <!-- <button id="twit-btn" type="submit" class="submit-btn">loading start!</button> -->
             </div>
-            <div class="input-group">
-              <textarea id="twit" name="content" maxlength="140"></textarea>
-              <input id="content" type="text" value="몬가이상해..">
+            <div class="login-Box">
+              <textarea class="text-field" placeholder="해시태그나 설명을 작성해주세요." id="twit" name="content" maxlength="140"></textarea>
+              <!-- <input id="content" type="text" value="몬가이상해.."> -->
             </div>
+            <button id="twit-btn" type="submit" class="submit-btn">loading start!</button>
           </form>
         </div>
       {% endif %}
+      
       <div class="twits">
-        <form id="hashtag-form" action="/hashtag">
-          <input type="text" name="hashtag" placeholder="태그 검색">
-          <button class="btn">검색</button>
-        </form>
+        <div class="form-mid">
+          <form class="d-flex tm-search-form" action="/hashtag">
+            <input class="form-control tm-search-input" type="search" name='hashtag' placeholder="Tag Search" aria-label="Search">
+            <button class="btn btn-outline-success tm-search-btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
         {% for twit in twits %}
           <div class="twit">
             <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">

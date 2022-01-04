@@ -2,210 +2,306 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="stylesheet" href="/main.css">
-  <title>{{title}}</title>
-
-  <!-- 여기부터 주석걸게 -->
-  <!-- Bootstrap core CSS -->
-  <!-- <link href="../bootstrap-3.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-
-  <!-- Custom styles for this template -->
-  <!-- <link href="/offcanvas.css" rel="stylesheet"> -->
-  <!-- <link href="../bootstrap-3.3.2/dist/css/bootstrap-theme.min.css" rel="stylesheet"> -->
-
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../bootstrap-3.3.2/dist/js/bootstrap.min.js"></script> -->
-  <!-- 여기까지야 -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script> -->
-
-
-
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-
-  <!-- 부가적인 테마 -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-
-  <link href="../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="offcanvas.css" rel="stylesheet">
-  <meta name="theme-color" content="#7952b3">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/offcanvas.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
 
 
 </head>
 
-
 <body>
-  <div id='wrap'>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="http://15.152.4.142:8080/">Scoreloader</a>
-        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
 
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">홈</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">악보요청</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">잡담</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                aria-expanded="false">Settings</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-          </ul>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
 
-          <form class="d-flex" id="hashtag-form" action="/hashtag">
-            <input class="form-control me-2" type="search" placeholder="태그검색" aria-label="Search" name="hashtag">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-
-
-
-
-    <div class="container py-3">
-      <!-- <div class="row row-offcanvas row-offcanvas-left"> -->
-
-      <div class="col-xs-12 col-sm-12">
-
-        <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
-          <h1>Welcome Scoreloader!</h1>
-          <div class="col-md-6">
-            {% if user and user.id %}
-            <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
-            <div class="half">
-              <div>팔로잉</div>
-              <div class="count following-count">{{followingCount}}</div>
-            </div>
-            <div class="half">
-              <div>팔로워</div>
-              <div class="count follower-count">{{followerCount}}</div>
-            </div>
-            <input id="my-id" type="hidden" value="{{user.id}}">
-            <a id="my-profile" href="/profile" class="btn btn btn-primary">내 프로필</a>
-            <a id="logout" href="/auth/logout" class="btn btn btn-primary">로그아웃</a>
-            {% else %}
-            <form id="login-form" action="/auth/login" method="post">
-              <div class="input-group">
-                <label for="email">이메일</label>
-                <input id="email" type="email" name="email" required autofocus
-                  style="width:230px;height:30px;font-size:12px;">
-              </div>
-              <div class="input-group">
-                <label for="password">비밀번호</label>
-                <input id="password" type="password" name="password" required
-                  style="width:230px;height:30px;font-size:12px;">
-              </div>
-              <a id="join" href="/join" class="btn btn-primary">회원가입</a>
-              <button id="login" type="submit" class="btn btn-primary">로그인</button>
-              <a id="kakao" href="/auth/kakao" class="btn btn-success">카카오톡</a>
-              <a id="kakao" href="/auth/naver" class="btn btn-success">네이버</a>
-            </form>
-            {% endif %}
-
-            <p>Hava a nice day.</p>
-          </div>
-
-        </div>
-        <div class="col-xs-12 col-sm-12 shadow-lg">
-          <!-- <div class="profile-wrap"> -->
-
-          {% block content %}
-          {% endblock %}
-          <!-- </div> -->
-        </div>
-
-
-
-
-        <div class="row">
-          <div class="col-xs-6 col-lg-6">
-            <h3>스물, 그리고 스물다섯</h3>
-            <p>해당 사이트는 개발자의 티스토리 블로그입니다. 이곳에서 개발자가 어떤것에 관심이 있는지, 개발자의 트러블 슈팅을 볼 수 있어요!</p>
-            <p><a class="btn btn btn-info" href="https://nan-sso-gong.tistory.com/" role="button">View details »</a></p>
-          </div>
-          <!--/.col-xs-6.col-lg-4-->
-          <div class="col-xs-6 col-lg-6">
-            <h3>Mug-ju's Github</h3>
-            <p>개발자의 GitHub 입니다. 개발자가 어떤 프로젝트를 진행해 왔는지 확인할 수 있어요!<br><br> </p>
-            <p><a class="btn btn btn-info" href="https://github.com/mugju" role="button">View details »</a></p>
-          </div>
-
-
-        </div>
-        <!--/row-->
-      </div>
-      <!--/.col-xs-12.col-sm-9-->
-
-      <!-- <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-             -->
-      <div class="sidebar-module sidebar-module-inset">
-        <h3>New loaded Score</h3>
-        <p>이곳에는 최신 업로드된 악보들이 나올 공간입니다.</p>
-      </div>
-      <!-- </div> -->
     </div>
-    <!--/.sidebar-offcanvas-->
 
-    <!--/row-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-film mr-2"></i>
+                ScoreLoader
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1 active" aria-current="page" href="index.html">악보요청</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-2" href="videos.html">자유게시판</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        #login-Box {
+            margin: 15px;
+            padding: 30px;
+            width: 2500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
 
-  </div>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    window.onload = () => {
-      if (new URL(location.href).searchParams.get('loginError')) {
-        alert(new URL(location.href).searchParams.get('loginError'));
-      }
-    };
-  </script>
+        #login-Btn {
+            margin: 8px;
+            padding: 7px;
 
-  {% block script %}
-  {% endblock %}
+        }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+        #login-h1 {
+            align-items: center;
+            color: azure;
+        }
+    </style>
 
-  <script src="/offcanvas.js"></script>
 
-  </div>
-  <footer class="card-footer">
-    Made by&nbsp;
-    <a href="https://github.com/mugju/scoreloader" target="_blank">DongD</a>
-    <p>
-      <a href="#">Back to top</a>
-    </p>
-    <button class="btn btn-info" onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-  </footer>
 
+    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll"
+        data-image-src="img/hero.jpg">
+        <div class="p-5  rounded-3 shadow-lg" id='login-Box'>
+            <!-- <h1 id='login-h1'>Welcome Scoreloader!</h1> -->
+            <div>
+                {% if user and user.id %}
+                <div class="login-form">
+                    <div>{{'안녕하세요! ' + user.nick + '님'}}</div>
+                    <div class="half">
+                        <div>팔로잉</div>
+                        <div>{{followingCount}}</div>
+                    </div>
+                    <div class="half">
+                        <div>팔로워</div>
+                        <div class="count follower-count">{{followerCount}}</div>
+                    </div>
+                    <input id="my-id" type="hidden" value="{{user.id}}">
+                    <a id="my-profile" href="/profile" class="submit-btn">내 프로필</a>
+                    <a id="logout" href="/auth/logout" class="submit-btn">로그아웃</a>
+                </div>
+                {% else %}
+
+                <div class="login-form">
+
+
+                    <!-- <div class="links">
+                      <a href="#">비밀번호를 잊어버리셨나요?</a>
+                    </div> -->
+
+                    <form id="login-form" action="/auth/login" method="post">
+                        <input type="email" name="email" class="text-field" placeholder="아이디">
+                        <input type="password" name="password" class="text-field" placeholder="비밀번호">
+                        <input type="submit" value="로그인" class="submit-btn">
+
+                        <a id="login-Btn" href="/join" class="submit-btn">회원가입</a>
+                        <!-- <button id="login-Btn" type="submit" class="btn btn-success">로그인</button> -->
+                        <a id="login-Btn" href="/auth/kakao" class="submit-btn">카카오톡</a>
+
+                        <a id="login-Btn" href="/auth/naver" class="submit-btn">네이버</a>
+                    </form>
+                </div>
+                {% endif %}
+
+                <p>Have a nice day.</p>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="content-box">
+        <!-- <div class="profile-wrap"> -->
+
+        {% block content %}
+        {% endblock %}
+        <!-- </div> -->
+    </div>
+
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary">
+                Latest Photos
+            </h2>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
+                </form>
+            </div>
+        </div>
+        <div class="row tm-mb-90 tm-gallery">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-03.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Clocks</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">18 Oct 2020</span>
+                    <span>9,906 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-04.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Plants</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">14 Oct 2020</span>
+                    <span>16,100 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-05.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Morning</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">12 Oct 2020</span>
+                    <span>12,460 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-06.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Pinky</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">10 Oct 2020</span>
+                    <span>11,402 views</span>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-01.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Hangers</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">24 Sep 2020</span>
+                    <span>16,008 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-02.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Perfumes</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">20 Sep 2020</span>
+                    <span>12,860 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-07.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Bus</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">16 Sep 2020</span>
+                    <span>10,900 views</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/img-08.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>New York</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">12 Sep 2020</span>
+                    <span>11,300 views</span>
+                </div>
+            </div>
+
+
+        </div> <!-- row -->
+        <div class="row tm-mb-90">
+            <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+                <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+                <div class="tm-paging d-flex">
+                    <a href="javascript:void(0);" class="active tm-paging-link">1</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">2</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">3</a>
+                    <a href="javascript:void(0);" class="tm-paging-link">4</a>
+                </div>
+                <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
+            </div>
+        </div>
+    </div> <!-- container-fluid, tm-container-content -->
+
+    <footer class="card-footer">
+        Made by&nbsp;
+        <a href="https://github.com/mugju/scoreloader" target="_blank">DongD</a>
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+        <button class="btn btn-info" onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    </footer>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        window.onload = () => {
+            if (new URL(location.href).searchParams.get('loginError')) {
+                alert(new URL(location.href).searchParams.get('loginError'));
+            }
+        };
+    </script>
+
+    {% block script %}
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="js/offcanvas.js"></script>
+
+    <script src="js/plugins.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $('body').addClass('loaded');
+        });
+    </script>
 </body>
 
 </html>
